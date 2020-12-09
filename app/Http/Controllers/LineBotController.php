@@ -16,8 +16,8 @@ class LineBotController extends Controller
 
     public function parrot(Request $request)
     {
-        $httpClient = new CurlHTTPClient(env('LINE_ACCESS_TOKEN'));
-        $lineBot = new LINEBot($httpClient, ['channelSecret' => env('LINE_CHANNEL_SECRET')]);
+        $httpClient = new CurlHTTPClient(getenv('LINE_ACCESS_TOKEN'));
+        $lineBot = new LINEBot($httpClient, ['channelSecret' => getenv('LINE_CHANNEL_SECRET')]);
 
         $signature = $request->header('x-line-signature');
 
