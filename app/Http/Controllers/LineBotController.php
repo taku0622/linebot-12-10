@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use LINE\LINEBot;
-use LINE\LINEBot\Event\MessageEvent\TextMessage;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 
 class LineBotController extends Controller
@@ -29,10 +28,6 @@ class LineBotController extends Controller
         $events = $lineBot->parseEventRequest($request->getContent(), $signature);
 
         foreach ($events as $event) {
-            if (!($event instanceof TextMessage)) {
-                continue;
-            }
-
             $replyToken = $event->getReplyToken();
             $replyText = $event->getText();
             error_log($replyText);
