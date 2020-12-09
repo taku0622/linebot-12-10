@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LineBotController;
 
@@ -16,8 +16,8 @@ use App\Http\Controllers\LineBotController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 Route::post('/parrot', [LineBotController::class, 'parrot']);
