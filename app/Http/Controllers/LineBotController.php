@@ -16,6 +16,7 @@ class LineBotController extends Controller
 
     public function parrot(Request $request)
     {
+        error_log("============== hello ============")
         $httpClient = new CurlHTTPClient(getenv('LINE_ACCESS_TOKEN'));
         $lineBot = new LINEBot($httpClient, ['channelSecret' => getenv('LINE_CHANNEL_SECRET')]);
 
