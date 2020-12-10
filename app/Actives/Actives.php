@@ -46,6 +46,7 @@ class Actives
                 [
                     'user_id' => $userId,
                     'question_count' => 0,
+                    'important_count' => 0,
                     'new_count' => 0,
                     'canel_count' => 0,
                     'event_count' => 0,
