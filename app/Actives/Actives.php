@@ -11,6 +11,7 @@ class Actives
     {
         error_log("-------------- active mode -----------");
         error_log("userId: " . $userId . "  text: " . $text);
+        error_log(date('Y-m-d H:i:s'));
         // どのカラムにするかの分岐
         switch ($text) {
             case "質問":
@@ -41,7 +42,6 @@ class Actives
             DB::table('actives1')->where('user_id', $userId)
                 ->increment($column, 1, ['updated_at' => date('Y-m-d H:i:s')]);
         } else { //ない時
-            error_log("----------- ここまで  ------------");
             DB::table('actives1')->insert(
                 [
                     'user_id' => $userId,
