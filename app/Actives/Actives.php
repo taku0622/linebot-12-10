@@ -12,7 +12,7 @@ class Actives
         error_log("-------------- active mode -----------");
         error_log("userId: " . $userId . "  text: " . $text);
         date_default_timezone_set('Asia/Tokyo');
-        error_log(date('Y-m-d H:i:s'))
+        error_log(date('Y-m-d H:i:s'));
         // どのカラムにするかの分岐
         switch ($text) {
             case "質問":
@@ -40,7 +40,7 @@ class Actives
         // データがあるか
         if (DB::table('actives2')->where('user_id', $userId)->exists()) {
             DB::table('actives2')->where('user_id', $userId)
-                ->increment($column);
+                ->increment($column, 1, ['updated_at' => date('Y-m-d H:i:s')]);
         } else { //ない時
             DB::table('actives2')->insert(
                 [
@@ -51,7 +51,9 @@ class Actives
                     'canel_count' => 0,
                     'event_count' => 0,
                     'setting_count' => 0,
-                    'other_count' => 0
+                    'other_count' => 0,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
                 ]
             );
             DB::table('actives2')->where('user_id', $userId)->increment($column);
