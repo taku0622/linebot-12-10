@@ -36,11 +36,13 @@ class Actives
                 break;
         }
         // データがあるか
-        if (DB::table('actives')->where('user_id', $userId)->exists()) {
-            DB::table('actives')->where('user_id', $userId)->increment($column);
+        date_default_timezone_set('Asia/Tokyo');
+        if (DB::table('actives1')->where('user_id', $userId)->exists()) {
+            DB::table('actives1')->where('user_id', $userId)
+                ->increment($column, 1, ['updated_at' => date('Y-m-d')]);
         } else { //ない時
             error_log("----------- ここまで  ------------");
-            DB::table('actives')->insert(
+            DB::table('actives1')->insert(
                 [
                     'user_id' => $userId,
                     'question_count' => 0,
@@ -48,7 +50,9 @@ class Actives
                     'canel_count' => 0,
                     'event_count' => 0,
                     'setting_count' => 0,
-                    'other_count' => 0
+                    'other_count' => 0,
+                    'created_at' => date('Y-m-d'),
+                    'updated_at' => date('Y-m-d'),
                 ]
             );
             DB::table('actives')->where('user_id', $userId)->increment($column);
