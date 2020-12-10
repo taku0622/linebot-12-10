@@ -56,7 +56,7 @@ class Actives
                     'updated_at' => date('Y-m-d'),
                 ]
             );
-            DB::table('actives')->where('user_id', $userId)->increment($column);
+            DB::table('actives1')->where('user_id', $userId)->increment($column);
         }
     }
 }
