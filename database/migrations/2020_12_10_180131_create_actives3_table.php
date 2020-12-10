@@ -27,9 +27,6 @@ class CreateActives3Table extends Migration
             $table->integer('push_cancel_count');
             $table->timestamps();
             $table->unique('user_id');
-            $table->integer('push_important_count');
-            $table->integer('push_new_count');
-            $table->integer('push_cancel_count');
         });
     }
 
