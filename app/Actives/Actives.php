@@ -40,7 +40,7 @@ class Actives
         // データがあるか
         if (DB::table('actives2')->where('user_id', $userId)->exists()) {
             DB::table('actives2')->where('user_id', $userId)
-                ->increment($column, 1, ['updated_at' => date('Y-m-d H:i:s')]);
+                ->increment($column);
         } else { //ない時
             DB::table('actives2')->insert(
                 [
@@ -51,9 +51,7 @@ class Actives
                     'canel_count' => 0,
                     'event_count' => 0,
                     'setting_count' => 0,
-                    'other_count' => 0,
-                    'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s'),
+                    'other_count' => 0
                 ]
             );
             DB::table('actives2')->where('user_id', $userId)->increment($column);
