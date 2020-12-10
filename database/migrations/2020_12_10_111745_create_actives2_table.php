@@ -22,8 +22,7 @@ class CreateActives2Table extends Migration
             $table->integer('event_count');
             $table->integer('setting_count');
             $table->integer('other_count');
-            $table->timestamps('created_at');
-            $table->timestamps('updated_at');
+            $table->timestamps();
             $table->unique('user_id');
         });
     }

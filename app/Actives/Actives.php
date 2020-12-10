@@ -11,7 +11,8 @@ class Actives
     {
         error_log("-------------- active mode -----------");
         error_log("userId: " . $userId . "  text: " . $text);
-        error_log(date('Y-m-d H:i:s'));
+        date_default_timezone_set('Asia/Tokyo');
+        error_log(date('Y-m-d H:i:s'))
         // どのカラムにするかの分岐
         switch ($text) {
             case "質問":
@@ -37,7 +38,6 @@ class Actives
                 break;
         }
         // データがあるか
-        date_default_timezone_set('Asia/Tokyo');
         if (DB::table('actives1')->where('user_id', $userId)->exists()) {
             DB::table('actives1')->where('user_id', $userId)
                 ->increment($column, 1, ['updated_at' => date('Y-m-d H:i:s')]);
