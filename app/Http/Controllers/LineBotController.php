@@ -30,6 +30,8 @@ class LineBotController extends Controller
         foreach ($events as $event) {
             $replyToken = $event->getReplyToken();
             $replyText = $event->getText();
+            $userId = $event->getUserId();
+            error_log("replyToken is : " . $replyToken . "  replyText is : " . $replyText . "  userId is : " . $userId);
             error_log($replyText);
             $lineBot->replyText($replyToken, $replyText);
         }
