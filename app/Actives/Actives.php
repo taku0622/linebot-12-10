@@ -38,11 +38,11 @@ class Actives
                 break;
         }
         // データがあるか
-        if (DB::table('actives1')->where('user_id', $userId)->exists()) {
-            DB::table('actives1')->where('user_id', $userId)
+        if (DB::table('actives2')->where('user_id', $userId)->exists()) {
+            DB::table('actives2')->where('user_id', $userId)
                 ->increment($column, 1, ['updated_at' => date('Y-m-d H:i:s')]);
         } else { //ない時
-            DB::table('actives1')->insert(
+            DB::table('actives2')->insert(
                 [
                     'user_id' => $userId,
                     'question_count' => 0,
@@ -56,7 +56,7 @@ class Actives
                     'updated_at' => date('Y-m-d H:i:s'),
                 ]
             );
-            DB::table('actives1')->where('user_id', $userId)->increment($column);
+            DB::table('actives2')->where('user_id', $userId)->increment($column);
         }
     }
 }
