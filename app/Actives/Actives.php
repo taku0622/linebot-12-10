@@ -39,6 +39,7 @@ class Actives
         if (DB::table('actives')->where('user_id', $userId)->exists()) {
             DB::table('actives')->where('user_id', $userId)->increment($column);
         } else { //ない時
+            error_log("----------- ここまで  ------------");
             DB::table('actives')->insert(
                 [
                     'user_id' => $userId,
