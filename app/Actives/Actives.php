@@ -26,19 +26,31 @@ class Actives
                 $column = 'canel_count';
                 break;
             case "イベント":
-                $column = 'setting_count';
+                $column = 'event_count';
                 break;
             case "設定":
-                $column = 'question_count';
+                $column = 'setting_count';
                 break;
             default:
-                $column = 'question_count';
+                $column = 'other_count';
                 break;
         }
         // データがあるか
         if (DB::table('actives')->where('user_id', $userId)->exists()) {
+            DB::table('actives')->where('user_id', $userId)->increment($column);
         } else { //ない時
-
+            DB::table('actives')->insert(
+                [
+                    'user_id' => $userId,
+                    'question_count' => 0,
+                    'new_count' => 0,
+                    'canel_count' => 0,
+                    'event_count' => 0,
+                    'setting_count' => 0,
+                    'other_count' => 0
+                ]
+            );
+            DB::table('actives')->where('user_id', $userId)->increment($column);
         }
     }
 }
