@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class Actives
 {
-    public function actives($userId, $text)
+    public function responseActives($userId, $text)
     {
         error_log("-------------- active mode -----------");
         error_log("userId: " . $userId . "  text: " . $text);
@@ -38,11 +38,11 @@ class Actives
                 break;
         }
         // データがあるか
-        if (DB::table('actives2')->where('user_id', $userId)->exists()) {
-            DB::table('actives2')->where('user_id', $userId)
+        if (DB::table('actives3')->where('user_id', $userId)->exists()) {
+            DB::table('actives3')->where('user_id', $userId)
                 ->increment($column, 1, ['updated_at' => date('Y-m-d H:i:s')]);
         } else { //ない時
-            DB::table('actives2')->insert(
+            DB::table('actives3')->insert(
                 [
                     'user_id' => $userId,
                     'question_count' => 0,
@@ -52,11 +52,48 @@ class Actives
                     'event_count' => 0,
                     'setting_count' => 0,
                     'other_count' => 0,
+                    'push_important_count' => 0,
+                    'push_new_count ' => 0,
+                    'push_cancel_count' => 0,
+                    'push_event_count' => 0,
                     'created_at' => date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s'),
                 ]
             );
-            DB::table('actives2')->where('user_id', $userId)->increment($column);
+            DB::table('actives3')->where('user_id', $userId)->increment($column);
+        }
+    }
+    public function pushActives($idList, $column)
+    {
+        error_log("-------------- active mode -----------");
+        date_default_timezone_set('Asia/Tokyo');
+        error_log(date('Y-m-d H:i:s'));
+        foreach ($idList as $userId)
+            // データがあるか
+            if (DB::table('actives3')->where('user_id', $userId)->exists()) {
+                DB::table('actives3')->where('user_id', $userId)
+                    ->increment($column, 1, ['updated_at' => date('Y-m-d H:i:s')]);
+            } else { //ない時
+                DB::table('actives3')->insert(
+                    [
+                        'user_id' => $userId,
+                        'question_count' => 0,
+                        'important_count' => 0,
+                        'new_count' => 0,
+                        'canel_count' => 0,
+                        'event_count' => 0,
+                        'setting_count' => 0,
+                        'other_count' => 0,
+                        'push_important_count' => 0,
+                        'push_new_count ' => 0,
+                        'push_cancel_count' => 0,
+                        'push_event_count' => 0,
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'updated_at' => date('Y-m-d H:i:s'),
+                    ]
+                );
+                DB::table('actives3')->where('user_id', $userId)->increment($column);
+            }
         }
     }
 }

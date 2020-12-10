@@ -36,7 +36,7 @@ class LineBotController extends Controller
             error_log("replyToken is : " . $replyToken . "  replyText is : " . $replyText . "  userId is : " . $userId);
             error_log($replyText);
             $active = new Actives();
-            $active->actives($userId, $replyText);
+            $active->responseActives($userId, $replyText);
             $lineBot->replyText($replyToken, $replyText);
         }
     }
