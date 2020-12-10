@@ -68,7 +68,7 @@ class Actives
         error_log("-------------- active mode -----------");
         date_default_timezone_set('Asia/Tokyo');
         error_log(date('Y-m-d H:i:s'));
-        foreach ($idList as $userId)
+        foreach ($idList as $userId) {
             // データがあるか
             if (DB::table('actives3')->where('user_id', $userId)->exists()) {
                 DB::table('actives3')->where('user_id', $userId)
