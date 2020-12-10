@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
-use Illuminate\Support\Facades\DB;
+
+use App\Actives\Actives;
 
 class LineBotController extends Controller
 {
@@ -34,6 +35,8 @@ class LineBotController extends Controller
             $userId = $event->getUserId();
             error_log("replyToken is : " . $replyToken . "  replyText is : " . $replyText . "  userId is : " . $userId);
             error_log($replyText);
+            $active = new Actives();
+            $active->actives($userId, $replyText);
             $lineBot->replyText($replyToken, $replyText);
         }
     }
