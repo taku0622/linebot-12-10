@@ -39,7 +39,7 @@ class Actives
         date_default_timezone_set('Asia/Tokyo');
         if (DB::table('actives1')->where('user_id', $userId)->exists()) {
             DB::table('actives1')->where('user_id', $userId)
-                ->increment($column, 1, ['updated_at' => date('Y-m-d')]);
+                ->increment($column, 1, ['updated_at' => date('Y-m-d H-i-s')]);
         } else { //ない時
             error_log("----------- ここまで  ------------");
             DB::table('actives1')->insert(
@@ -52,8 +52,8 @@ class Actives
                     'event_count' => 0,
                     'setting_count' => 0,
                     'other_count' => 0,
-                    'created_at' => date('Y-m-d'),
-                    'updated_at' => date('Y-m-d'),
+                    'created_at' => date('Y-m-d H-i-s'),
+                    'updated_at' => date('Y-m-d H-i-s'),
                 ]
             );
             DB::table('actives1')->where('user_id', $userId)->increment($column);
